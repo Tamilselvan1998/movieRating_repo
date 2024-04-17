@@ -1,9 +1,5 @@
-// server.js
-
 const express = require('express');
 const bodyParser = require('body-parser');
-
-
 
 const app = express();
 const port = 3000;
@@ -45,22 +41,36 @@ app.get('/movies/:id', (req, res) => {
     res.status(404).json({ error: 'Movie not found' });
   }
 });
+
 // Create a new movie
 app.post('/movies', (req, res) => {
-  const { title, year, genre } = req.body;
+  const { title, year, genre, country, grade } = req.body;
   const id = movies.length + 1;
-  const newMovie = { id, title, year, genre };
+  const newMovie = { id, title, year, genre, country, grade, comments: [] };
   movies.push(newMovie);
   res.status(201).json(newMovie);
+});
+
+// Add comment to a movie
+app.post('/movies/:id/comments', (req, res) => {
+  const id = parseInt(req.params.id);
+  const comment = req.body.comment;
+  const movie = movies.find(movie => movie.id === id);
+  if (movie) {
+    movie.comments.push(comment);
+    res.status(201).json(movie);
+  } else {
+    res.status(404).json({ error: 'Movie not found' });
+  }
 });
 
 // Update an existing movie
 app.put('/movies/:id', (req, res) => {
   const id = parseInt(req.params.id);
-  const { title, year, genre } = req.body;
+  const { title, year, genre, country, grade, image } = req.body;
   const movieIndex = movies.findIndex(movie => movie.id === id);
   if (movieIndex !== -1) {
-    movies[movieIndex] = { id, title, year, genre };
+    movies[movieIndex] = { id, title, year, genre, country, grade, image, comments: movies[movieIndex].comments };
     res.json(movies[movieIndex]);
   } else {
     res.status(404).json({ error: 'Movie not found' });
