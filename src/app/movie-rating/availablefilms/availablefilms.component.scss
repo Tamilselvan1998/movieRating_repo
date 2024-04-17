@@ -1,0 +1,98 @@
+/* movie.component.css */
+.movie-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    .movie-header {
+    
+        font-size: 24px;
+        font-weight: bold;
+        // margin-bottom: 20px;
+      
+        width: 100%;
+      }
+  }
+  
+  
+  
+  .movie-form {
+    width: 100%;
+    max-width: 600px;
+    background-color: #aacdfa;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 40px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+ 
+
+  
+  .movie-form h2 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #333;
+  }
+ .h-btn{
+    display: flex;
+    justify-content: flex-end;
+ }
+  
+.movie-form input[type="text"],
+.movie-form input[type="number"],
+.movie-form select,
+.movie-form textarea {
+//   width: 100%;
+  padding: 12px;
+  margin-bottom: 10px; /* Add margin-bottom for space between input fields */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+.movie-form input[type="text"]:focus,
+.movie-form input[type="number"]:focus,
+.movie-form select:focus,
+.movie-form textarea:focus {
+  border-color: #007bff;
+}
+  
+ button{
+    border-radius: 10px;
+    background-color: #007bff;
+    color: white;
+    padding:10px;
+  
+}
+.inputs{
+    width: 100%;
+    max-width: 500px;
+    background-color: #76affa;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 50px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+}
+.buttons{
+    display: flex;
+    justify-content: flex-end;
+}
+  
+  .movie-form button:nth-child(2) {
+    margin-top: 0;
+    margin-left: 10px;
+  }
+  
+  .movie-form button:hover {
+    background-color: #0056b3;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .movie-form {
+      width: 90%;
+      padding: 30px;
+    }
+  }
+  

@@ -1,0 +1,45 @@
+<!-- movie.component.html -->
+<div class="movie-container">
+   
+    <div [formGroup]="movieForm" class="movie-form">
+        <div class="row">
+        <h2 class="movie-header ">Available Films</h2>
+          
+           <div class="col-md-8">
+        
+            <select formControlName="selectedMovie">
+                <option [ngValue]="null" disabled selected>Please select a movie</option>
+                <option *ngFor="let movie of movieList" [ngValue]="movie">{{ movie.title }}</option>
+            </select>
+            <div>
+            <button (click)="addMovie()">Add Film</button>
+            </div>
+            
+           
+        
+        </div>
+        </div>
+        <div class="row inputs">
+            <h2>{{ movieForm.get('selectedMovie')?.value?.title }}</h2>
+            <div class="col-md-8">
+              
+                
+                <input type="text" formControlName="year" placeholder="Year">
+                <input type="text" formControlName="kind" placeholder="Kind">
+              
+            </div>
+            <div class="col-md-8">
+                <input type="text" formControlName="country" placeholder="Country">
+                <input type="number" formControlName="grade" placeholder="Grade">
+            </div>
+            <div class="col-md-8">
+             
+                <textarea formControlName="comment" placeholder="Comment"></textarea>
+            </div>
+        </div>
+        <div class="buttons">
+            <button (click)="rateMovie()">Rate</button>
+            <button (click)="deleteMovie()">Delete</button>
+        </div>
+    </div>
+</div>
