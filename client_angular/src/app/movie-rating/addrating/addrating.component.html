@@ -1,0 +1,23 @@
+<!-- movie.component.html -->
+<div class="movie-container">
+    <div [formGroup]="RatingForm" class="movie-form" (ngSubmit)="onSave()">
+        <div class="row">
+            <h2 class="movie-header">Rate Films</h2>
+        </div>
+        <div class="">
+            <select formControlName="selectedMovie">
+                <option [ngValue]="null" disabled selected>Please select a movie</option>
+                <option *ngFor="let movie of movies" [ngValue]="movie">{{ movie.title }}</option>
+            </select>
+        </div>
+          <div>
+            <input type="number" id="rating" name="rating" formControlName="grade" [(ngModel)]="userRating" required>
+          </div>
+              <div>
+                <button type="submit">Save</button>
+          
+              </div>
+            </div>
+          
+        </div>
+

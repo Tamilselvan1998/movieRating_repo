@@ -1,0 +1,51 @@
+<!-- availablefilms.component.html -->
+<div class="movie-container">
+    <div [formGroup]="movieForm" class="movie-form" >
+        <div class="row">
+            <h2 class="movie-header">Available Films</h2>
+            <div class="h-btn">
+                <button (click)="addMovie()">Add Film</button>
+            </div>
+            <div class="col-md-8">
+                <select formControlName="selectedMovie" (change)="onMovieSelected()">
+                    <option [ngValue]="null" disabled selected>Please select a movie</option>
+                    <option *ngFor="let movie of movies" [ngValue]="movie">{{ movie.title }}</option>
+                </select>
+            </div>
+        </div>
+        <div class="inputs">
+            <!-- Edit and delete icons (initially hidden) -->
+            <div class="edit-delete-icons" *ngIf="movieForm.get('selectedMovie')?.value">
+                <div class="edit-delete-icons" *ngIf="movieForm.get('selectedMovie')?.value">
+                    <!-- Edit icon -->
+                    <span class="edit-icon" (click)="editMovie()">
+                      <i class="fas fa-edit"></i>
+                    </span>
+                    <!-- Delete icon -->
+                    <span class="delete-icon" (click)="deleteMovie(movieForm.get('selectedMovie')?.value?.id)">
+                      <i class="fas fa-trash-alt"></i>
+                    </span>
+                  </div>
+                  
+            </div>
+            <h2>{{ movieForm.get('selectedMovie')?.value?.title }}</h2>
+            <div class="col-md-8">
+                <input type="text" formControlName="year" placeholder="Year" [disabled]="!isInputEnabled">
+                <input type="text" formControlName="genre" placeholder="Kind" [disabled]="!isInputEnabled">
+            </div>
+            <div class="col-md-8">
+                <input type="text" formControlName="country" placeholder="Country" [disabled]="!isInputEnabled">
+                <input type="number" formControlName="grade" placeholder="Grade" [disabled]="!isInputEnabled">
+            </div>
+            <div class="col-md-8">
+                <textarea formControlName="comments" placeholder="Comment" [disabled]="!isInputEnabled"></textarea>
+                <button (click)="onSave()" *ngIf="isInputEnabled">Update</button>
+            </div>
+            <div class="rateBtn">
+                <button (click)="rateMovie()">Rate</button>
+               
+            </div>
+        </div>
+        
+    </div>
+</div>

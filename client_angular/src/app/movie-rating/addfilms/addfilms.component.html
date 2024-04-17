@@ -1,0 +1,27 @@
+<!-- HTML structure for the form -->
+<div class="form-container">
+    <h2 class="movie-header">Add Films</h2>
+    <form [formGroup]="movieForm" (ngSubmit)="onSave()">
+      <label for="title">Title:</label>
+      <input type="text" id="title" formControlName="title">
+  
+      <label for="year">Year:</label>
+      <input type="number" id="year" formControlName="year">
+  
+      <label for="genre">Genre:</label>
+      <input type="text" id="genre" formControlName="genre">
+  
+      <label for="country">Country:</label>
+      <input type="text" id="country" formControlName="country">
+  
+      <label for="grade">Grade:</label>
+      <input type="number" id="grade" formControlName="grade">
+
+      <label for="comments">Comments:</label>
+      <textarea type="text" id="comments"  width="100%" formControlName="comments"></textarea>
+       <div>
+      <button type="submit">Save</button>
+    </div>
+    </form>
+  </div>
+  
