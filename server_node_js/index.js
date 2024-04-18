@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const connectDb = require("./mongodb");
+const connectDb = require("./mongoDb");
 const Movie = require("./model"); // Assuming you have a Movie model defined
  
 const app = express();
@@ -80,20 +80,24 @@ app.post('/movies', async (req, res) => {
   }
 });
 
-app.post('/movies/:id/rating', (req, res) => {
-  const id = parseInt(req.params.id);
-  const { rating } = req.body;
-  const movie = movies.find(movie => movie.id === id);
-  if (movie) {
-    // Update the movie's average rating
-    const totalRating = movie.grade * movie.votes;
-    const newVotes = movie.votes + 1;
-    const newAverageRating = (totalRating + rating) / newVotes;
-    movie.grade = newAverageRating;
-    movie.votes = newVotes;
-    res.status(200).json({ message: 'Rating submitted successfully', movie });
-  } else {
-    res.status(404).json({ error: 'Movie not found' });
+app.post('/movies/:id', async (req, res) => {
+  const _id = req.params.id;
+  const { grade } = req.body;
+  try {
+    // Find the movie by ID in the database
+    const movie = await Movie.findById(_id);
+    if (!movie) {
+      return res.status(404).json({ error: 'Movie not found' });
+    }
+    const totalRating =  (movie.grade * grade) / 2;
+    const columnNew= {
+      grade:totalRating,
+    }
+    const  response=await Movie.findByIdAndUpdate(req.params.id, columnNew)
+    res.status(200).json({ message: 'Rating submitted successfully', response });
+  } catch (error) {
+    console.error('Error submitting rating', error);
+    res.status(500).json({ error:error.message });
   }
 });
  

@@ -15,15 +15,27 @@ export class AddratingComponent implements OnInit {
   @Output() save = new EventEmitter<Movie>();
   movieId!: string; 
   userRating!: number;
+  selectedMovies:string="" ;
 
 
   constructor(private route:Router ,private formBuilder: FormBuilder ,private movieService:Service) {
     this.RatingForm = this.formBuilder.group({
+      _id:[''],
       title: [''],
+      selectedMovies: [null],
       grade: ['', [Validators.required, Validators.min(1), Validators.max(5), this.validateRating]],
   
     });
   }
+
+  onMovieSelected() {
+    // Get the selected movie object from the form control
+    const selectedMovie = this.RatingForm.get('selectedMovies')?.value;
+    this.selectedMovies=selectedMovie._id
+  }
+  
+  
+
 
   validateRating(control: { value: any }) {
     const value = control.value;
@@ -45,33 +57,16 @@ export class AddratingComponent implements OnInit {
 
 
   
-  onSave():void {this.movieService.submitRating(this.movieId,this.userRating).subscribe
-      (
-        response => {
-          // Handle success
-          console
-            .
-            log
-            (
-              'Rating submitted successfully'
-            );
-          console
-            .
-            log
-            (response);
-        },
-        error => {
-          // Handle error
-          console
-            .
-            error
-            (
-              'Error submitting rating'
-            );
-          console
-            .
-            error
-            (error);
-        });
+  onSave(): void {
+    this.movieService.submitRating(this.selectedMovies, this.userRating).subscribe(
+      response => {
+        console.log('Rating submitted successfully', response);
+        // Optionally, you can reload the movies list after successful submission
+        this.loadMovies();
+      },
+      error => {
+        console.error('Error submitting rating', error);
+      }
+    );
   }
 }

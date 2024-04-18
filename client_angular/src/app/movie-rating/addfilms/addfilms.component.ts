@@ -12,15 +12,14 @@ import { Router } from '@angular/router';
 export class AddfilmsComponent implements OnInit {
 
   @Input() movie: Movie = {
-    id: "",
+    _id: "",
     title: '',
     year: 0,
     genre: '',
     country: '',
     grade: 0,
     comments: '',
-    imageUrl: '',
-    string: ''
+  
   };
   
   @Output() save = new EventEmitter<Movie>();
@@ -33,9 +32,7 @@ export class AddfilmsComponent implements OnInit {
       genre: [''],
       country: [''],
       grade: [''],
-      comments:[''],
-      imageUrl: ['']
-    });
+      comments:[''],    });
   }
   ngOnInit(): void {
 

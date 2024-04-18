@@ -22,7 +22,7 @@
                       <i class="fas fa-edit"></i>
                     </span>
                     <!-- Delete icon -->
-                    <span class="delete-icon" (click)="deleteMovie(movieForm.get('selectedMovie')?.value?.id)">
+                    <span class="delete-icon" (click)="deleteMovie(movieForm.get('selectedMovie')?.value?._id)">
                       <i class="fas fa-trash-alt"></i>
                     </span>
                   </div>

@@ -41,6 +41,7 @@ export class AvailablefilmsComponent implements OnInit {
   movieForms(){
 
     this.movieForm = this.formBuilder.group({
+      _id:[''],
       selectedMovie: [null],
       year: [''],
       genre: [''],
@@ -56,6 +57,7 @@ export class AvailablefilmsComponent implements OnInit {
       } else {
         // Clear form fields if no movie is selected
         this.movieForm.reset({
+          _id:'',
           selectedMovie: null,
           year: '',
           kind: '',
@@ -90,7 +92,7 @@ export class AvailablefilmsComponent implements OnInit {
   onMovieSelected() {
     // Show edit and delete icons when a movie is selected
     const selectedMovie = this.movieForm.get('selectedMovie')?.value;
-    this.showEditDeleteIcons = !!selectedMovie;
+    this.showEditDeleteIcons = !!selectedMovie;    
 }
 
 onSave() {
@@ -115,7 +117,7 @@ deleteMovie(id: string) {
   this.movieService.deleteMovie(id).subscribe(
     () => {
       // Filter out the deleted movie from the array
-      this.movies = this.movies.filter(movie => movie.id !== id);
+      this.movies = this.movies.filter(movie => movie._id !== id);
       // Clear the form after deletion
       this.movieForm.reset();
     },

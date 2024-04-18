@@ -28,7 +28,7 @@ export class Service {
   }
  
   updateMovie(movie: Movie): Observable<Movie> {
-    const url = `${this.baseUrl}/movies/${movie.id}`;
+    const url = `${this.baseUrl}/movies/${movie._id}`;
     return this.http.put<Movie>(url, movie);
   }
  
@@ -36,6 +36,8 @@ export class Service {
     return this.http.delete<void>(`${this.baseUrl}/movies/${id}`);
   }
 
-  submitRating(movieId:string,rating:number):Observable<any> { 
-    return this.http.post<any>(`${this.baseUrl}/movies/${movieId}/rating`, { rating });   }
+  submitRating(movieId:string,grade:number):Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/movies/${movieId}`, { grade }
+    );  
+ }
 }
